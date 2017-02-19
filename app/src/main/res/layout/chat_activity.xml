@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:id="@+id/fab"
+        app:fabSize="mini"
         android:tint="@android:color/white"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
