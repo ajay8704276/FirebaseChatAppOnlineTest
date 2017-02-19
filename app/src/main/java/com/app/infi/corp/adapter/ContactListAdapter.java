@@ -1,6 +1,7 @@
 package com.app.infi.corp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.app.infi.corp.R;
+import com.app.infi.corp.UIActivity.ChatActivity;
 import com.app.infi.corp.model.Contacts;
 
 import java.util.List;
@@ -21,6 +23,8 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
     List<Contacts> mContactsList;
     private Context mContext;
+    public static final String CONTACT_NAME = "CONTACT_NAME";
+    public static final String CONTACT_NUMBER = "CONTACT_NUMBER";
 
     @Override
     public ContactViewHoler onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -29,7 +33,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(ContactViewHoler holder, int position) {
+    public void onBindViewHolder(ContactViewHoler holder, final int position) {
 
         holder.mContactNumber.setText(mContactsList.get(position).getContactNumber());
         holder.mContactName.setText(mContactsList.get(position).getContactName());
@@ -38,6 +42,10 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             public void onClick(View v) {
 
                 // Start activity here for chat
+                Intent intent = new Intent(mContext, ChatActivity.class);
+                intent.putExtra(CONTACT_NAME ,mContactsList.get(position).getContactName());
+                intent.putExtra(CONTACT_NUMBER,mContactsList.get(position).getContactNumber());
+                mContext.startActivity(intent);
             }
         });
 
